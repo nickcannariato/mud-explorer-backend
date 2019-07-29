@@ -12,6 +12,7 @@ django = "*"
 djangorestframework = "*"
 djangorestframework-simplejwt = "*"
 dj-database-url = "*"
+psycopg2 = "*"
 
 [requires]
 python_version = "3.7"
