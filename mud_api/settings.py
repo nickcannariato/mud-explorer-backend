@@ -37,7 +37,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-    'user_profiles'
+    'user_profiles',
+    'mud_explorer',
 ]
 
 MIDDLEWARE = [
@@ -136,7 +137,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': os.environ['SECRET_KEY'],
+    'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
 
     'AUTH_HEADER_TYPES': ('Bearer', 'Token', 'JWT'),
@@ -153,4 +154,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-django_heroku.settings(locals())
+if not DEBUG:
+    django_heroku.settings(locals())
