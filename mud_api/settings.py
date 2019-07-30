@@ -15,7 +15,8 @@ SECRET_KEY = os.environ['DJ_SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DJ_DEBUG']
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1', '[::1]']
+ALLOWED_HOSTS = ['localhost', '127.0.0.1',
+                 '[::1]', 'nc-mud-explorer-api.herokuapp.com']
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = not os.environ['DJ_DEBUG']
 CSRF_COOKIE_SECURE = not os.environ['DJ_DEBUG']
