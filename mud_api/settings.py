@@ -133,7 +133,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': os.environ['SECRET_KEY'],
+    'SIGNING_KEY': SECRET_KEY,
     'VERIFYING_KEY': None,
 
     'AUTH_HEADER_TYPES': ('Bearer', 'Token', 'JWT'),
@@ -150,4 +150,5 @@ SIMPLE_JWT = {
     'SLIDING_TOKEN_REFRESH_LIFETIME': timedelta(days=1),
 }
 
-django_heroku.settings(locals())
+if not DEBUG:
+    django_heroku.settings(locals())
