@@ -71,7 +71,13 @@ class Room(models.Model):
             return None
 
     def get_coords(self):
-        return self.x, self.y
+        return {"x": self.x, "y": self.y}
+
+    def gen_room_list(self):
+        return [
+            self.get_coords(),
+            self.get_exits()
+        ]
 
     def __str__(self):
-        return f'"{self.id}": {self.title}'
+        return f'"{self.id}": {self.gen_room_list()}'
