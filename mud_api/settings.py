@@ -16,8 +16,7 @@ SECRET_KEY = os.environ['SECRET_KEY']
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.environ['DEBUG']
 
-ALLOWED_HOSTS = ['localhost', '127.0.0.1',
-                 '[::1]', 'nc-mud-explorer-api.herokuapp.com']
+ALLOWED_HOSTS = []
 X_FRAME_OPTIONS = 'DENY'
 SECURE_CONTENT_TYPE_NOSNIFF = not DEBUG
 CSRF_COOKIE_SECURE = not DEBUG
