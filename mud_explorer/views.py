@@ -37,7 +37,7 @@ def init_move(request):
 # NOT TESTED
 @api_view(['POST'])
 def init_take(request):
-    user = Proflie.objects.filter(user__username=request.user).first()
+    user = Profile.objects.filter(user__username=request.user).first()
     headers = {
         'Authorization': f'Token {user.game_token}'
     }
