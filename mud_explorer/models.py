@@ -13,22 +13,22 @@ class Room(models.Model):
                              on_delete=models.CASCADE,
                              blank=True,
                              null=True,
-                             related_name="north")
+                             related_name="south")
     s_to = models.ForeignKey('self',
                              on_delete=models.CASCADE,
                              blank=True,
                              null=True,
-                             related_name="south")
+                             related_name="north")
     e_to = models.ForeignKey('self',
                              on_delete=models.CASCADE,
                              blank=True,
                              null=True,
-                             related_name="east")
+                             related_name="west")
     w_to = models.ForeignKey('self',
                              on_delete=models.CASCADE,
                              blank=True,
                              null=True,
-                             related_name="west")
+                             related_name="east")
 
     def get_exits(self):
         exit_coords = dict()
