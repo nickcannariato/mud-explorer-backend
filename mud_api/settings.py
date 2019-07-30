@@ -17,11 +17,12 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DEBUG'] == 'True'
 
 ALLOWED_HOSTS = []
-# X_FRAME_OPTIONS = 'DENY'
-# SECURE_CONTENT_TYPE_NOSNIFF = not DEBUG
-# CSRF_COOKIE_SECURE = not DEBUG
-# SECURE_BROWSER_XSS_FILTER = not DEBUG
-# SECURE_SSL_REDIRECT = not DEBUG
+X_FRAME_OPTIONS = 'DENY'
+SECURE_CONTENT_TYPE_NOSNIFF = not DEBUG
+CSRF_COOKIE_SECURE = not DEBUG
+SECURE_BROWSER_XSS_FILTER = not DEBUG
+SECURE_SSL_REDIRECT = not DEBUG
+CORS_ORIGIN_ALLOW_ALL = True
 
 
 # Application definition
@@ -33,6 +34,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     "django.contrib.staticfiles",
+    'corsheaders',
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
     'user_profiles',
@@ -42,6 +44,7 @@ INSTALLED_APPS = [
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
