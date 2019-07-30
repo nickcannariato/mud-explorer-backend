@@ -130,7 +130,7 @@ SIMPLE_JWT = {
     'BLACKLIST_AFTER_ROTATION': True,
 
     'ALGORITHM': 'HS256',
-    'SIGNING_KEY': os.environ['DJ_SECRET_KEY'],
+    'SIGNING_KEY': os.environ['SECRET_KEY'],
     'VERIFYING_KEY': None,
 
     'AUTH_HEADER_TYPES': ('Bearer', 'Token', 'JWT'),
