@@ -34,27 +34,27 @@ class Room(models.Model):
         exit_coords = dict()
         if self.n_to is not None:
             exit_coords['n'] = {
-                id: self.n_to.id,
-                x: self.n_to.x,
-                y: self.n_to.y
+                'id': self.n_to.id,
+                'x': self.n_to.x,
+                'y': self.n_to.y
             }
         if self.s_to is not None:
             exit_coords['s'] = {
-                id: self.s_to.id,
-                x: self.s_to.x,
-                y: self.s_to.y
+                'id': self.s_to.id,
+                'x': self.s_to.x,
+                'y': self.s_to.y
             }
         if self.e_to is not None:
             exit_coords['e'] = {
-                id: self.e_to.id,
-                x: self.e_to.x,
-                y: self.e_to.y
+                'id': self.e_to.id,
+                'x': self.e_to.x,
+                'y': self.e_to.y
             }
         if self.w_to is not None:
             exit_coords['w'] = {
-                id: self.w_to.id,
-                x: self.w_to.x,
-                y: self.w_to.y
+                'id': self.w_to.id,
+                'x': self.w_to.x,
+                'y': self.w_to.y
             }
         return exit_coords
 
@@ -74,10 +74,4 @@ class Room(models.Model):
         return self.x, self.y
 
     def __str__(self):
-        coords = {
-            'x': self.x,
-            'y': self.y
-        }
-        exits = self.get_exits()
-
-        return f"{self.id}: [{coords}, {exits}]"
+        return f'"{self.id}": {self.title}'
