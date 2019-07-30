@@ -17,11 +17,11 @@ SECRET_KEY = os.environ['SECRET_KEY']
 DEBUG = os.environ['DEBUG'] == 'True'
 
 ALLOWED_HOSTS = []
-X_FRAME_OPTIONS = 'DENY'
-SECURE_CONTENT_TYPE_NOSNIFF = not DEBUG
-CSRF_COOKIE_SECURE = not DEBUG
-SECURE_BROWSER_XSS_FILTER = not DEBUG
-SECURE_SSL_REDIRECT = not DEBUG
+# X_FRAME_OPTIONS = 'DENY'
+# SECURE_CONTENT_TYPE_NOSNIFF = not DEBUG
+# CSRF_COOKIE_SECURE = not DEBUG
+# SECURE_BROWSER_XSS_FILTER = not DEBUG
+# SECURE_SSL_REDIRECT = not DEBUG
 
 
 # Application definition
@@ -35,7 +35,8 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'rest_framework',
     'rest_framework_simplejwt.token_blacklist',
-    'user_profiles'
+    'user_profiles',
+    'mud_explorer',
 ]
 
 MIDDLEWARE = [
