@@ -9,54 +9,22 @@ class Room(models.Model):
     elevation = models.IntegerField(default=0)
     x = models.IntegerField()
     y = models.IntegerField()
-    n_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="south")
-    s_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="north")
-    e_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="west")
-    w_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="east")
+    n_to = models.CharField(max_length=255)
+    s_to = models.CharField(max_length=255)
+    e_to = models.CharField(max_length=255)
+    w_to = models.CharField(max_length=255)
 
     def get_exits(self):
-        exit_coords = dict()
+        exit_dir = list()
         if self.n_to is not None:
-            exit_coords['n'] = {
-                'id': self.n_to.id,
-                'x': self.n_to.x,
-                'y': self.n_to.y
-            }
+            exit_dir.append('n')
         if self.s_to is not None:
-            exit_coords['s'] = {
-                'id': self.s_to.id,
-                'x': self.s_to.x,
-                'y': self.s_to.y
-            }
+            exit_dir.append('s')
         if self.e_to is not None:
-            exit_coords['e'] = {
-                'id': self.e_to.id,
-                'x': self.e_to.x,
-                'y': self.e_to.y
-            }
+            exit_dir.append('e')
         if self.w_to is not None:
-            exit_coords['w'] = {
-                'id': self.w_to.id,
-                'x': self.w_to.x,
-                'y': self.w_to.y
-            }
-        return exit_coords
+            exit_dir.append('w')
+        return exit_dir
 
     def connect_room_nodes(self, direction, room_node):
         if direction == 'n':
@@ -78,6 +46,16 @@ class Room(models.Model):
             self.get_coords(),
             self.get_exits()
         ]
+
+    def get_room_in_dir(self, direction):
+        if direction == 'n':
+            return self.n_to
+        elif direction == 's':
+            return self.s_to
+        elif direction == 'e':
+            return self.e_to
+        elif direction == 'w':
+            return self.w_to
 
     def __str__(self):
         return f'"{self.id}": {self.gen_room_list()}'
