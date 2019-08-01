@@ -15,8 +15,5 @@ urlpatterns = [
     path('pray/', init_pray, name="game-pray"),
     path('fly/', init_flight, name="game-fly"),
     path('dash/', init_dash, name="game-dash"),
-
-
-
-
+    path('rooms/', get_all_rooms, name="room-list")
 ]
