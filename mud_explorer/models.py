@@ -2,82 +2,25 @@ from django.db import models
 
 
 class Room(models.Model):
+    """
+    A representation of a room on the server.
+
+    :id: - The `room_id`
+    :x: - The `x` coordinate on the map
+    :y: - The `y` coordinate on the map
+    :n: - The id of the room to the north (if any)
+    :s: - The id of the room to the south (if any)
+    :e: - The id of the room to the east (if any)
+    :w: - The id of the room to the west (if any)
+    """
     id = models.IntegerField(primary_key=True)
-    title = models.CharField(max_length=255)
-    description = models.TextField(blank=True)
-    terrain = models.CharField(max_length=255, blank=True)
-    elevation = models.IntegerField(default=0)
     x = models.IntegerField()
     y = models.IntegerField()
-    n_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="south")
-    s_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="north")
-    e_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="west")
-    w_to = models.ForeignKey('self',
-                             on_delete=models.CASCADE,
-                             blank=True,
-                             null=True,
-                             related_name="east")
+    n = models.IntegerField(blank=True, null=True)
+    s = models.IntegerField(blank=True, null=True)
+    e = models.IntegerField(blank=True, null=True)
+    w = models.IntegerField(blank=True, null=True)
 
-    def get_exits(self):
-        exit_coords = dict()
-        if self.n_to is not None:
-            exit_coords['n'] = {
-                'id': self.n_to.id,
-                'x': self.n_to.x,
-                'y': self.n_to.y
-            }
-        if self.s_to is not None:
-            exit_coords['s'] = {
-                'id': self.s_to.id,
-                'x': self.s_to.x,
-                'y': self.s_to.y
-            }
-        if self.e_to is not None:
-            exit_coords['e'] = {
-                'id': self.e_to.id,
-                'x': self.e_to.x,
-                'y': self.e_to.y
-            }
-        if self.w_to is not None:
-            exit_coords['w'] = {
-                'id': self.w_to.id,
-                'x': self.w_to.x,
-                'y': self.w_to.y
-            }
-        return exit_coords
-
-    def connect_room_nodes(self, direction, room_node):
-        if direction == 'n':
-            self.n_to, room_node.s_to = room_node, self
-        elif direction == 's':
-            self.s_to, room_node.n_to = room_node, self
-        elif direction == 'e':
-            self.e_to, room_node.w_to = room_node, self
-        elif direction == 'w':
-            self.w_to, room_node.e_to = room_node, self
-        else:
-            return None
-
-    def get_coords(self):
-        return {"x": self.x, "y": self.y}
-
-    def gen_room_list(self):
-        return [
-            self.get_coords(),
-            self.get_exits()
-        ]
-
-    def __str__(self):
-        return f'"{self.id}": {self.gen_room_list()}'
+    @classmethod
+    def create(cls, id, x, y, n, s, e, w):
+        return cls(id=id, x=x, y=y, n=n, s=s, e=e, w=w)
