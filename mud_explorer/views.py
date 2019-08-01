@@ -123,7 +123,8 @@ def init_examine(request):
         'Authorization': f'Token {user.game_token}'
     }
     data = json.dumps(request.data)
-    response = requests.post(f'{BASE_URL}/examine/', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/examine/',
+                             headers=headers, data=data)
 
     return Response(response.json())
 
@@ -135,12 +136,8 @@ def init_change_name(request):
         'Authorization': f'Token {user.game_token}'
     }
     data = json.dumps(request.data)
-<<<<<<< HEAD
     response = requests.post(
-        f'{BASE_URL}/change_name', headers=headers, data=data)
-=======
-    response = requests.post(f'{BASE_URL}/change_name/', headers=headers, data=data)
->>>>>>> d98f3fdb4d082091e03be0e4721369aea7c6ed24
+        f'{BASE_URL}/change_name/', headers=headers, data=data)
 
     return Response(response.json())
 
