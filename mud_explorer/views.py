@@ -4,8 +4,24 @@ import requests
 import json
 
 from user_profiles.models import Profile
+from .models import Room
 
 BASE_URL = 'https://lambda-treasure-hunt.herokuapp.com/api/adv'
+
+
+@api_view(['GET'])
+def get_all_rooms(request):
+    rooms = Room.objects.all().order_by('id')
+    out_dict = dict()
+
+    for room in rooms:
+        out_dict[room.id] = [(room.x, room.y), {}]
+        out_dict[room.id][1]['n'] = room.n
+        out_dict[room.id][1]['s'] = room.s
+        out_dict[room.id][1]['e'] = room.e
+        out_dict[room.id][1]['w'] = room.w
+
+    return Response(out_dict)
 
 
 @api_view(['GET'])
@@ -26,8 +42,7 @@ def init_move(request):
     headers = {
         'Authorization': f'Token {user.game_token}'
     }
-   
-    
+
     data = json.dumps(request.data)
 
     response = requests.post(f'{BASE_URL}/move', headers=headers, data=data)
@@ -41,7 +56,7 @@ def init_take(request):
     headers = {
         'Authorization': f'Token {user.game_token}'
     }
-    
+
     data = json.dumps(request.data)
     response = requests.post(f'{BASE_URL}/take', headers=headers, data=data)
 
@@ -88,6 +103,7 @@ def init_confirm_sell(request):
 
     return Response(response.json())
 
+
 @api_view(['POST'])
 def init_status(request):
     user = Profile.objects.filter(user__username=request.user).first()
@@ -98,6 +114,7 @@ def init_status(request):
     response = requests.post(f'{BASE_URL}/status/', headers=headers)
 
     return Response(response.json())
+
 
 @api_view(['POST'])
 def init_examine(request):
@@ -110,6 +127,7 @@ def init_examine(request):
 
     return Response(response.json())
 
+
 @api_view(['POST'])
 def init_change_name(request):
     user = Profile.objects.filter(user__username=request.user).first()
@@ -117,9 +135,11 @@ def init_change_name(request):
         'Authorization': f'Token {user.game_token}'
     }
     data = json.dumps(request.data)
-    response = requests.post(f'{BASE_URL}/change_name', headers=headers, data=data)
+    response = requests.post(
+        f'{BASE_URL}/change_name', headers=headers, data=data)
 
     return Response(response.json())
+
 
 @api_view(['POST'])
 def init_pray(request):
@@ -130,6 +150,7 @@ def init_pray(request):
     response = requests.post(f'{BASE_URL}/pray', headers=headers)
 
     return Response(response.json())
+
 
 @api_view(['POST'])
 def init_flight(request):
@@ -142,6 +163,7 @@ def init_flight(request):
     response = requests.post(f'{BASE_URL}/fly', headers=headers, data=data)
 
     return Response(response.json())
+
 
 @api_view(['POST'])
 def init_dash(request):
