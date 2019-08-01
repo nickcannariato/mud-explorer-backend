@@ -1,4 +1,5 @@
 from rest_framework.decorators import api_view
+from rest_framework.pagination import PageNumberPagination
 from rest_framework.response import Response
 import requests
 import json
@@ -11,8 +12,8 @@ BASE_URL = 'https://lambda-treasure-hunt.herokuapp.com/api/adv'
 
 @api_view(['GET'])
 def get_all_rooms(request):
-    print('I made it here')
-    rooms = Room.objects.all().order_by('id')
+    start_time = time.time()
+    rooms = Room.objects.all().order_by('id')[:100]
     out_dict = dict()
 
     for room in rooms:
@@ -21,7 +22,7 @@ def get_all_rooms(request):
         out_dict[room.id][1]['s'] = room.s
         out_dict[room.id][1]['e'] = room.e
         out_dict[room.id][1]['w'] = room.w
-    print('outdict', out_dict)
+    print("--- %s seconds ---" % (time.time() - start_time))
     return Response(out_dict)
 
 
