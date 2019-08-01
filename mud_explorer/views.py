@@ -45,7 +45,7 @@ def init_move(request):
 
     data = json.dumps(request.data)
 
-    response = requests.post(f'{BASE_URL}/move', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/move/', headers=headers, data=data)
     print(data)
     return Response(response.json())
 
@@ -58,7 +58,7 @@ def init_take(request):
     }
 
     data = json.dumps(request.data)
-    response = requests.post(f'{BASE_URL}/take', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/take/', headers=headers, data=data)
 
     return Response(response.json())
 
@@ -71,7 +71,7 @@ def init_drop(request):
     }
     data = json.dumps(request.data)
 
-    response = requests.post(f'{BASE_URL}/drop', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/drop/', headers=headers, data=data)
 
     return Response(response.json())
 
@@ -84,7 +84,7 @@ def init_sell(request):
     }
     data = json.dumps(request.data)
 
-    response = requests.post(f'{BASE_URL}/sell', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/sell/', headers=headers, data=data)
 
     return Response(response.json())
 
@@ -99,7 +99,7 @@ def init_confirm_sell(request):
         'name': request.data.name,
         'confirm': 'yes'
     })
-    response = requests.post(f'{BASE_URL}/sell', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/sell/', headers=headers, data=data)
 
     return Response(response.json())
 
@@ -123,7 +123,7 @@ def init_examine(request):
         'Authorization': f'Token {user.game_token}'
     }
     data = json.dumps(request.data)
-    response = requests.post(f'{BASE_URL}/examine', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/examine/', headers=headers, data=data)
 
     return Response(response.json())
 
@@ -135,8 +135,12 @@ def init_change_name(request):
         'Authorization': f'Token {user.game_token}'
     }
     data = json.dumps(request.data)
+<<<<<<< HEAD
     response = requests.post(
         f'{BASE_URL}/change_name', headers=headers, data=data)
+=======
+    response = requests.post(f'{BASE_URL}/change_name/', headers=headers, data=data)
+>>>>>>> d98f3fdb4d082091e03be0e4721369aea7c6ed24
 
     return Response(response.json())
 
@@ -147,7 +151,7 @@ def init_pray(request):
     headers = {
         'Authorization': f'Token {user.game_token}'
     }
-    response = requests.post(f'{BASE_URL}/pray', headers=headers)
+    response = requests.post(f'{BASE_URL}/pray/', headers=headers)
 
     return Response(response.json())
 
@@ -160,7 +164,7 @@ def init_flight(request):
     }
     data = json.dumps(request.data)
 
-    response = requests.post(f'{BASE_URL}/fly', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/fly/', headers=headers, data=data)
 
     return Response(response.json())
 
@@ -172,6 +176,6 @@ def init_dash(request):
         'Authorization': f'Token {user.game_token}'
     }
     data = json.dumps(request.data)
-    response = requests.post(f'{BASE_URL}/dash', headers=headers, data=data)
+    response = requests.post(f'{BASE_URL}/dash/', headers=headers, data=data)
 
     return Response(response.json())
