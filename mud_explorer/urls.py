@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import init_pass, init_move, init_take, init_drop, init_sell, init_confirm_sell, init_status, init_examine, init_change_name, init_pray, init_flight, init_dash
+from .views import init_pass, init_move, init_take, init_drop, init_sell, init_confirm_sell, init_status, init_examine, init_change_name, init_pray, init_flight, init_dash, get_all_rooms
 
 urlpatterns = [
     path('init/', init_pass, name="game-init"),
