@@ -11,6 +11,7 @@ BASE_URL = 'https://lambda-treasure-hunt.herokuapp.com/api/adv'
 
 @api_view(['GET'])
 def get_all_rooms(request):
+    print('I made it here')
     rooms = Room.objects.all().order_by('id')
     out_dict = dict()
 
@@ -20,7 +21,7 @@ def get_all_rooms(request):
         out_dict[room.id][1]['s'] = room.s
         out_dict[room.id][1]['e'] = room.e
         out_dict[room.id][1]['w'] = room.w
-
+    print('outdict', out_dict)
     return Response(out_dict)
 
 
